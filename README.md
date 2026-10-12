@@ -1,20 +1,20 @@
 # htmx-grimoire
 
-An agent skill for writing, reviewing and debugging **htmx 4**.
+An agent skill for writing, reviewing and debugging **new htmx 4 projects** without loading the full htmx docs.
 
 ## What is in it
 
 The skill lives in [`htmx-grimoire/`](htmx-grimoire/):
 
-- **`SKILL.md`**: the htmx 4 behaviours that surprise people, the htmx 2 names and their replacements,
-  core vocabulary, the server's half of the contract, how to choose an approach, and a checklist to run before
-  handing code over.
-- **`references/`**, generated from the official htmx docs (`four-dev` branch, htmx 4.0.0):
-  - `api/`: one page per attribute, plus events, headers, config, JavaScript methods and tags
+- **`SKILL.md`**: a compact htmx 4 checklist: surprising defaults, core attributes, server contract,
+  approach selection, pattern index and final review checklist.
+- **`references/`**, curated from the official htmx docs (`four-dev` branch, htmx 4.0.0):
   - `patterns/`: 19 UI patterns such as active search, infinite scroll, inline edit, dialogs and LLM streaming
-  - `extensions/`: 17 extensions, including `hx-sse`, `hx-ws`, `hx-live` and `htmx-2-compat`
-  - `guides/`: upgrading from htmx 2, debugging, morphing, events, `hx-live` and more
-  - `docs.md`: the main htmx documentation page
+  - `guides/hx-live.md`: the hx-live guide
+  - `extensions/hx-live.md`: the hx-live extension reference
+
+The full API docs, general narrative docs, extension catalogue, and htmx 2 → 4 migration material are intentionally
+not bundled. This skill is optimized for starting new htmx 4 projects with low token overhead, not for migrations.
 
 ## How it differs from `htmx-guidance`
 
@@ -22,16 +22,15 @@ The skill lives in [`htmx-grimoire/`](htmx-grimoire/):
 
 | | `htmx-guidance` | `htmx-grimoire` |
 |---|---|---|
-| Layout | One file, everything inline | Shorter core file plus 89 reference files loaded on demand |
-| Source of exact syntax | A hand-written summary | The official docs, bundled |
-| Emphasis | Attribute-by-attribute overview | Leads with what fails quietly in htmx 4 (explicit `:inherited`, renamed attributes and events) |
-| Upgrades and debugging | A section on htmx 2 vs 4 differences | Step-by-step upgrade and debugging guides |
+| Layout | One file, everything inline | Compact core file plus a small curated pattern/hx-live reference set |
+| Source of exact syntax | A hand-written summary | Compact htmx 4 rules plus official worked patterns |
+| Emphasis | Attribute-by-attribute overview | New-project correctness: `:inherited`, server fragments, status handling, streaming and hx-live |
+| Upgrades and debugging | A section on htmx 2 vs 4 differences | Not a migration skill; migration docs are deliberately excluded |
 | When it triggers | Requests that mention htmx | Also hypermedia-style requests that do not name htmx (active search, inline edit, token streaming "without a JS framework") |
 
-In a small benchmark (3 tasks, 3 runs each, graded with mechanical checks for htmx 4 correctness), output written
-with `htmx-grimoire` passed 100% of the checks against 96% for `htmx-guidance`. It also took about twice as long and
-used about twice the tokens (188s vs 96s and 101k vs 58k tokens on average), because the agent reads reference files.
-The sample is small; treat the numbers as an indication only.
+Earlier versions bundled almost the entire official documentation. In a small benchmark that improved checked htmx 4
+correctness only marginally, while roughly doubling runtime and token use because agents read reference files. The
+current version keeps the high-signal parts: the compact checklist, official patterns, and hx-live docs.
 
 ## Install
 
@@ -54,14 +53,14 @@ Use `.claude/skills/` inside a project instead to install it for that project on
 
 ## Updating the references
 
-`references/` is generated; do not edit it by hand. To refresh it from upstream:
+`references/` is generated as a curated subset; do not edit it by hand. To refresh it from upstream:
 
 ```sh
-python tools/sync_docs.py
+python3 tools/sync_docs.py
 ```
 
-This clones the `four-dev` branch of [bigskysoftware/htmx](https://github.com/bigskysoftware/htmx) and rebuilds
-`htmx-grimoire/references/`. `references/SOURCE.md` records the commit and htmx version it was built from.
+This clones the `four-dev` branch of [bigskysoftware/htmx](https://github.com/bigskysoftware/htmx) and rebuilds only
+the pattern and hx-live references. `references/SOURCE.md` records the commit and htmx version it was built from.
 
 ## Credits
 
