@@ -34,22 +34,17 @@ current version keeps the high-signal parts: the compact checklist, official pat
 
 ## Install
 
-Give your agent this URL and ask it to install the skill:
-
-```
-https://github.com/namzug16/htmx-grimoire
-```
-
-For example: "Install the skill from https://github.com/namzug16/htmx-grimoire".
-
-To install by hand, copy the `htmx-grimoire/` folder into your agent's skills directory. For Claude Code:
+Install with the Skills CLI:
 
 ```sh
-git clone https://github.com/namzug16/htmx-grimoire
-cp -r htmx-grimoire/htmx-grimoire ~/.claude/skills/
+npx skills add namzug16/htmx-grimoire
 ```
 
-Use `.claude/skills/` inside a project instead to install it for that project only.
+To install only this skill explicitly:
+
+```sh
+npx skills add namzug16/htmx-grimoire --skill htmx-grimoire
+```
 
 ## Updating the references
 
