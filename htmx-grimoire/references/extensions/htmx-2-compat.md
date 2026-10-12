@@ -1,0 +1,23 @@
+# htmx-2-compat
+
+> Restore htmx 2.x defaults and event names on htmx 4
+
+The `htmx-2-compat` extension provides a compatibility layer that allows htmx 2.x code to run on htmx 4 with minimal changes. This is useful for gradual migration of existing applications.
+
+## Installing
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@4.0.0/dist/htmx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@4.0.0/dist/ext/htmx-2-compat.js"></script>
+```
+
+## Usage
+
+Once loaded, the extension maps old htmx 2.x APIs and behaviors to their htmx 4 equivalents, including:
+
+- Old event names (e.g., `htmx:afterSwap` → `htmx:after:swap`)
+- Implicit attribute inheritance (without requiring `:inherited` modifier)
+- The `hx-ext` attribute for activating extensions
+- Other htmx 2.x behaviors that changed in htmx 4
+
+See the Migration guide for a full list of changes between htmx 2.x and htmx 4.
